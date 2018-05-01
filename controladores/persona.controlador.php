@@ -1,30 +1,28 @@
 <?php
 
-class ControladorUsuarios {
+class ControladorPersona {
 
 	/*=======================================
-	=            INGRESO USUARIO            =
+	=            INGRESO PERSONA            =
 	=======================================*/
 	
-	public function ctrIngresoUsuario() {
+	public function ctrIngresoPersona() {
 
-		if(isset($_POST['ingresoUsuario']) && isset($_POST['ingresoPassword'])) {
+		if(isset($_POST['ingresoEmail']) && isset($_POST['ingresoPassword'])) {
 
-			if(preg_match('/^[a-zA-Z0-9]+$/', $_POST['ingresoUsuario']) &&
+			if(
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST['ingresoPassword'])) {
 
 			   	$encriptar = crypt($_POST['ingresoPassword'],'$2a$07$usesomesillystringforsalt$');
-				
-				$tabla = "usuarios";
 
-				$item = "usuario";
+				$item = "sEmail";
 
-				$valor = $_POST['ingresoUsuario'];
+				$valor = $_POST['ingresoEmail'];
 
-				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+				$respuesta = ModeloPersona::MdlMostrarPersona($item, $valor);
 
-				if($respuesta["usuario"] == $_POST["ingresoUsuario"] &&
-				   $respuesta["password"] == $encriptar) {
+				if($respuesta["sEmail"] == $_POST["ingresoEmail"] &&
+				   $respuesta["sPassword"] == $encriptar) {
 
 				   	$_SESSION["iniciarSesion"] = "ok";
 				    $_SESSION["id"] = $respuesta["id"];
@@ -39,8 +37,19 @@ class ControladorUsuarios {
 
 				}
 				else {
-
-					echo '<br><div class="alert alert-danger">Error al ingresar. Vuelve a intentar.</div>';
+					echo '<script>
+					swal({
+						type: "error",
+						title: "¡Error en el usuario/password!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false						
+					}).then((result)=> {
+						if(result.value){
+							window.location = "login";
+						}
+					});
+					</script>';
 				
 				}
 			}
@@ -48,10 +57,10 @@ class ControladorUsuarios {
 	}
 
 	/*=======================================
-	=            CREAR USUARIO            =
+	=            CREAR PERSONA            =
 	=======================================*/
 	
-	public function ctrCrearUsuario() {
+	public function ctrCrearPersona() {
 
 		if(isset($_POST["nuevoUsuario"])) {
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
@@ -125,7 +134,7 @@ class ControladorUsuarios {
 						"perfil" => $_POST["nuevoPerfil"],
 						"foto" => $ruta);
 
-				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
+				$respuesta = ModeloPersona::mdlIngresarPersona($tabla, $datos);
 
 				if($respuesta == "ok") {
 					echo '<script>
@@ -166,16 +175,21 @@ class ControladorUsuarios {
 	=            MOSTRAR USUARIO            =
 	=======================================*/
 	
-	static public function ctrMostrarUsuarios($item, $valor) {
+	static public function ctrMostrarPersonas($item, $valor) {
 
 		$tabla = "usuarios";
-		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+		$respuesta = ModeloPersona::MdlMostrarPersonas($tabla, $item, $valor);
 
 		return $respuesta;
 
 	}
 
-public function ctrRegistroUsuario() {
+
+	/*=======================================
+	=            REGISTRO PERSONA            =
+	=======================================*/
+
+public function ctrRegistroPersona() {
 
 		if(isset($_POST["registroNombre"])) {
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["registroNombre"]) &&
@@ -183,6 +197,25 @@ public function ctrRegistroUsuario() {
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["registroPassword"]) &&
 				preg_match('/^[a-zA-Z0-9]+$/', $_POST["registroPasswordRepite"]) &&
 				preg_match('/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/', $_POST["registroEmail"])) {
+
+				if($_POST["registroPassword"] != $_POST['registroPasswordRepite']) {
+
+					echo '<script>
+					swal({
+						type: "error",
+						title: "¡El password no coincide!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar",
+						closeOnConfirm: false						
+					}).then((result)=> {
+						if(result.value){
+							window.location = "usuarios";
+						}
+					});
+					</script>';
+
+				}
+				else {
 
 				/*======================================
 				=            VALIDAR IMAGEN            =
@@ -251,7 +284,7 @@ public function ctrRegistroUsuario() {
 						"password" => $encriptar,
 						"foto" => $ruta);
 
-				$respuesta = ModeloUsuarios::mdlCrearUsuario($datos);
+				$respuesta = ModeloPersona::mdlCrearPersona($datos);
 
 				if($respuesta == "ok") {
 					echo '<script>
@@ -263,7 +296,7 @@ public function ctrRegistroUsuario() {
 						closeOnConfirm: false						
 					}).then((result)=> {
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "login";
 						}
 					});
 					</script>';
@@ -283,7 +316,7 @@ public function ctrRegistroUsuario() {
 					});
 					</script>';
 				}
-			}
+			} }
 			else {
 			echo '<script>
 					swal({

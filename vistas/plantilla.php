@@ -9,7 +9,7 @@ session_start();
   <title>ARKEIDS - Torneos</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="icon" href="vistas/img/plantilla/icono-negro.png">
+  <link rel="icon" href="vistas/img/plantilla/logo-torneos.png">
  
  <!--======================================
  =              PLUGINS DE CSS            =
@@ -60,7 +60,7 @@ session_start();
 
   <?php
 
-  /*if(isset($_SESSION["iniciarSesion"]) && $_SESSION['iniciarSesion'] == "ok")
+  if(isset($_SESSION["iniciarSesion"]) && $_SESSION['iniciarSesion'] == "ok")
     { 
       echo '<div class="wrapper">';
 
@@ -95,10 +95,13 @@ session_start();
     }
 
     else {
-      include "modulos/login.php";
-    }*/
+      if(isset($_POST["botonRegistro"])){
+        include "modulos/registro.php";
+      }
+      else include "modulos/login.php";
+    }
 
-    include "modulos/registro.php";
+    
     
    
   ?>

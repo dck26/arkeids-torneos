@@ -2,13 +2,15 @@
 
 require_once "conexion.php";
 
-class ModeloUsuarios {
+class ModeloPersona {
 
 	/*========================================
 	=            MOSTRAR USUARIOS            =
 	========================================*/
 	
-	static public function mdlMostrarUsuarios($tabla, $item, $valor){
+	static public function mdlMostrarPersona($item, $valor){
+
+		$tabla = "01_Persona";
 
 		if($item != null) {
 
@@ -40,7 +42,7 @@ class ModeloUsuarios {
 	=            REISTRO USUARIOS            =
 	========================================*/	
 	
-	static public function mdlIngresarUsuario($tabla, $datos) {
+	static public function mdlIngresarPersona($tabla, $datos) {
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre, usuario, password, perfil, foto) VALUES (:nombre, :usuario, :password, :perfil, :foto)");
 
@@ -74,7 +76,7 @@ class ModeloUsuarios {
 
 		$tabla = "01_persona";
 
-		$stmt = Conexion::conectar()->prepare("SELECT sApodo FROM $tabla WHERE sApodo = :apodo OR sEmail = :email");
+		$stmt = Conexion::conectar()->prepare("SELECT count(sApodo) FROM $tabla WHERE sApodo = :apodo OR sEmail = :email");
 		$stmt -> bindParam(":apodo", $datos["apodo"], PDO::PARAM_STR);
 		$stmt -> bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt->execute();
@@ -97,14 +99,14 @@ class ModeloUsuarios {
 
 
 	/*========================================
-	=            REGISTRO USUARIOS            =
+	=            REGISTRO PEROSONA            =
 	========================================*/	
 	
-	static public function mdlCrearUsuario($datos) {
+	static public function mdlCrearPersona($datos) {
 
-		if(ModeloUsuarios::mdlPersonaDuplicada($datos)) {
+		if(ModeloPersona::mdlPersonaDuplicada($datos)) {
 			return "duplicado";
-		}
+		} else {
 
 		$tabla = "01_persona";
 
@@ -122,6 +124,7 @@ class ModeloUsuarios {
 		else {
 			return "error";
 		}
+	}
 		$stmt -> close();
 
 		$stmt = null;

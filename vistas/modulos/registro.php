@@ -11,7 +11,7 @@
 
     <div class="login-box-body">
 
-      <p class="login-box-msg">Registrate</p>
+      <p class="login-box-msg">Registro</p>
 
       <form method="post" enctype="multipart/form-data">
 
@@ -64,15 +64,16 @@
 
           <div class="col-xs-4">
 
-            <button type="submit" name="registrarse" class="btn btn-primary btn-block btn-flat">Registrarse</button>
+            <button type="submit" name="botonRegistrarse" class="btn btn-primary btn-block btn-flat" value="boton-volver">Volver</button>
+            <button type="submit" name="botonRegistrarse" class="btn btn-primary btn-block btn-flat" value="boton-registro">Registrarse</button>
 
           </div>
 
         </div>
 
         <?php
-          $login = new ControladorUsuarios();
-          $login -> ctrRegistroUsuario();
+          $login = new ControladorPersona();
+          $login -> ctrRegistroPersona();
         ?>
 
       </form>
