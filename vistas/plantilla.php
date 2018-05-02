@@ -60,6 +60,18 @@ session_start();
 
   <?php
 
+/*=============================================
+  =            Valida si seleccionó registro            =
+  =============================================*/
+  
+if(isset($_GET["ruta"]))
+  if($_GET["ruta"] == "registro")
+    include "modulos/".$_GET["ruta"].".php";
+
+/*===============================================
+=            Valida si inició sesión            =
+===============================================*/
+
   if(isset($_SESSION["iniciarSesion"]) && $_SESSION['iniciarSesion'] == "ok")
     { 
       echo '<div class="wrapper">';
@@ -78,7 +90,8 @@ session_start();
            $_GET["ruta"] == "ventas" ||
            $_GET["ruta"] == "crear-venta" ||
            $_GET["ruta"] == "reportes" ||
-           $_GET["ruta"] == "salir") {
+           $_GET["ruta"] == "salir" ||
+           $_GET["ruta"] == "registro") {
           include "modulos/".$_GET["ruta"].".php";
         }
         else {
@@ -95,10 +108,7 @@ session_start();
     }
 
     else {
-      if(isset($_POST["botonRegistro"])){
-        include "modulos/registro.php";
-      }
-      else include "modulos/login.php";
+      include "modulos/login.php";
     }
 
     

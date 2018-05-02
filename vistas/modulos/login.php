@@ -32,14 +32,19 @@
         <div class="row">
 
 
-          <div class="col-xs-4">
+          <div class="col-xs-6">
 
             <button type="submit" name="botonIngreso" class="btn btn-primary btn-block btn-flat" value="boton-ingreso">Ingresar</button>
-            <button type="submit" name="botonRegistro" class="btn btn-primary btn-block btn-flat" value="boton-registro">Registrarse</button>
 
           </div>
 
+          <div class="col-xs-6">
+              <a class="btn btn-success btn-block btn-flat" href="registro">Registrarse</a>
+          </div>
+
         </div>
+
+      </div>
 
         <?php
           $login = new ControladorPersona();

@@ -209,7 +209,7 @@ public function ctrRegistroPersona() {
 						closeOnConfirm: false						
 					}).then((result)=> {
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "registro";
 						}
 					});
 					</script>';

@@ -62,10 +62,14 @@
         <div class="row">
 
 
-          <div class="col-xs-4">
+          <div class="col-xs-6">
 
-            <button type="submit" name="botonRegistrarse" class="btn btn-primary btn-block btn-flat" value="boton-volver">Volver</button>
-            <button type="submit" name="botonRegistrarse" class="btn btn-primary btn-block btn-flat" value="boton-registro">Registrarse</button>
+            <a class="btn btn-default btn-block btn-flat" href="login">Cancelar</a>
+
+          </div>
+          <div class="col-xs-6">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Confirmar</button>
+          </div>
 
           </div>
 
