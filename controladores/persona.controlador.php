@@ -15,14 +15,14 @@ class ControladorPersona {
 
 			   	$encriptar = crypt($_POST['ingresoPassword'],'$2a$07$usesomesillystringforsalt$');
 
-				$item = "sEmail";
+				$item = "email";
 
 				$valor = $_POST['ingresoEmail'];
 
 				$respuesta = ModeloPersona::MdlMostrarPersona($item, $valor);
 
-				if($respuesta["sEmail"] == $_POST["ingresoEmail"] &&
-				   $respuesta["sPassword"] == $encriptar) {
+				if($respuesta["email"] == $_POST["ingresoEmail"] &&
+				   $respuesta["password"] == $encriptar) {
 
 				   	$_SESSION["iniciarSesion"] = "ok";
 				    $_SESSION["id"] = $respuesta["id"];
@@ -32,7 +32,7 @@ class ControladorPersona {
 				    $_SESSION["perfil"] = $respuesta["perfil"];
 
 				   echo '<script>
-				   			window.location = "inicio";
+				   			window.location = "torneos";
 				   		</script>';
 
 				}
@@ -311,7 +311,7 @@ public function ctrRegistroPersona() {
 						closeOnConfirm: false						
 					}).then((result)=> {
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "registro";
 						}
 					});
 					</script>';
@@ -327,7 +327,7 @@ public function ctrRegistroPersona() {
 						closeOnConfirm: false						
 					}).then((result)=> {
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "registro";
 						}
 					});
 					</script>';

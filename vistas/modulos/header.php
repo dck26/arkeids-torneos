@@ -29,11 +29,7 @@
 		
 		<!-- Botón de navegación -->
 
-	 	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        	
-        	<span class="sr-only">Toggle navigation</span>
-      	
-      	</a>
+
 
 		<!-- perfil de usuario -->
 
@@ -41,7 +37,7 @@
 				
 			<ul class="nav navbar-nav">
 
-				<li><a href="#">Torneos</a></li>
+				<li><a href="torneos">Torneos</a></li>
 				<li><a href="#">Mis Torneos</a></li>
 				<li><a href="#">Mi Perfil</a></li>
 				

@@ -76,7 +76,7 @@ class ModeloPersona {
 
 		$tabla = "01_persona";
 
-		$stmt = Conexion::conectar()->prepare("SELECT count(sApodo) FROM $tabla WHERE sApodo = :apodo OR sEmail = :email");
+		$stmt = Conexion::conectar()->prepare("SELECT count(apodo) FROM $tabla WHERE apodo = :apodo OR email = :email");
 		$stmt -> bindParam(":apodo", $datos["apodo"], PDO::PARAM_STR);
 		$stmt -> bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt->execute();
@@ -110,7 +110,7 @@ class ModeloPersona {
 
 		$tabla = "01_persona";
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (sNombre, sApodo, sPassword, sEmail, sFoto) VALUES (:nombre, :apodo, :password, :email, :foto)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre, apodo, password, email, foto) VALUES (:nombre, :apodo, :password, :email, :foto)");
 		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt -> bindParam(":apodo", $datos["apodo"], PDO::PARAM_STR);
 		$stmt -> bindParam(":password", $datos["password"], PDO::PARAM_STR);

@@ -60,14 +60,6 @@ session_start();
 
   <?php
 
-/*=============================================
-  =            Valida si seleccionó registro            =
-  =============================================*/
-  
-if(isset($_GET["ruta"]))
-  if($_GET["ruta"] == "registro")
-    include "modulos/".$_GET["ruta"].".php";
-
 /*===============================================
 =            Valida si inició sesión            =
 ===============================================*/
@@ -83,7 +75,7 @@ if(isset($_GET["ruta"]))
       if(isset($_GET["ruta"])) {
 
         if($_GET["ruta"] == "inicio" ||
-           $_GET["ruta"] == "usuarios" ||
+           $_GET["ruta"] == "torneos" ||
            $_GET["ruta"] == "categorias" ||
            $_GET["ruta"] == "productos" ||
            $_GET["ruta"] == "clientes" ||
@@ -108,7 +100,10 @@ if(isset($_GET["ruta"]))
     }
 
     else {
-      include "modulos/login.php";
+      if(isset($_GET["ruta"]) && $_GET["ruta"] == "registro")
+          include "modulos/".$_GET["ruta"].".php";
+      else
+          include "modulos/login.php";
     }
 
     
